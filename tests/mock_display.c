@@ -1,0 +1,33 @@
+#include "mock_display.h"
+#include <string.h>
+
+static void mock_draw_pixel(void *ctx,
+                            uint16_t x,
+                            uint16_t y,
+                            uint16_t color)
+{
+    mock_display_t *mock = (mock_display_t *)ctx;
+
+    if (x >= MOCK_WIDTH || y >= MOCK_HEIGHT)
+        return;
+
+    mock->buffer[y][x] = color;
+}
+
+void mock_display_init(mock_display_t *mock,
+                       c_gfx_display_t *display)
+{
+    memset(mock->buffer, 0, sizeof(mock->buffer));
+
+    display->width = MOCK_WIDTH;
+    display->height = MOCK_HEIGHT;
+    display->draw_pixel = mock_draw_pixel;
+    display->ctx = mock;
+}
+
+uint16_t mock_get_pixel(mock_display_t *mock,
+                        uint16_t x,
+                        uint16_t y)
+{
+    return mock->buffer[y][x];
+}

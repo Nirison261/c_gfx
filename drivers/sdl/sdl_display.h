@@ -1,0 +1,26 @@
+#ifndef SDL_DISPLAY_H
+#define SDL_DISPLAY_H
+
+#include "c_gfx_display.h"
+#include <SDL2/SDL.h>
+
+typedef struct {
+
+    SDL_Window   *window;
+    SDL_Renderer *renderer;
+
+    uint16_t width;
+    uint16_t height;
+
+} sdl_display_t;
+
+int  sdl_display_init(sdl_display_t *dev,
+                      uint16_t width,
+                      uint16_t height);
+
+void sdl_display_create(sdl_display_t *dev,
+                        c_gfx_display_t *display);
+
+void sdl_display_present(sdl_display_t *dev);
+
+#endif

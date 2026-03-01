@@ -2,8 +2,8 @@
 #include <string.h>
 
 static void mock_draw_pixel(c_gfx_display_t *disp,
-                            uint16_t x,
-                            uint16_t y,
+                            int x,
+                            int y,
                             uint16_t color)
 {
     mock_display_t *mock = disp->user_data;

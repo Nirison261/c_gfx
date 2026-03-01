@@ -12,20 +12,20 @@ typedef struct c_gfx_display
     /* Mandatory function */
     void (*draw_pixel)(
         struct c_gfx_display *disp,
-        uint16_t x,
-        uint16_t y,
+        int x,
+        int y,
         uint16_t color);
 
     /* Optional accelerated primitives */
     void (*draw_line)(
         struct c_gfx_display *disp,
-        uint16_t x0, uint16_t y0,
-        uint16_t x1, uint16_t y1,
+        int x0, int y0,
+        int x1, int y1,
         uint16_t color);
 
     void (*fill_rect)(
         struct c_gfx_display *disp,
-        uint16_t x, uint16_t y,
+        int x, int y,
         uint16_t w, uint16_t h,
         uint16_t color);
 

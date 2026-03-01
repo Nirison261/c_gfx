@@ -13,13 +13,15 @@ typedef struct
     uint16_t width;
     uint16_t height;
 
+    uint16_t *framebuffer;
+
     c_gfx_display_t interface;
 
 } sdl_display_t;
 
 int sdl_display_init(sdl_display_t *dev,
-                        int width,
-                        int height);
+                        uint16_t width,
+                        uint16_t height);
 
 c_gfx_display_t* sdl_display_get_interface(sdl_display_t *dev);
 

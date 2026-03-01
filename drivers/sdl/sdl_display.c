@@ -3,8 +3,8 @@
 #include <stdio.h>
 
 static void sdl_draw_pixel(c_gfx_display_t *disp,
-                           uint16_t x,
-                           uint16_t y,
+                           int x,
+                           int y,
                            uint16_t color)
 {
     sdl_display_t *dev = disp->user_data;
@@ -21,7 +21,26 @@ static void sdl_draw_pixel(c_gfx_display_t *disp,
     SDL_RenderDrawPoint(dev->renderer, x, y);
 }
 
-int sdl_display_init(sdl_display_t *dev, int width, int height)
+static void sdl_draw_line(c_gfx_display_t *disp,
+                          int x0, int y0,
+                          int x1, int y1,
+                          uint16_t color)
+{
+    sdl_display_t *dev = disp->user_data;
+
+    uint8_t r = (color >> 11) & 0x1F;
+    uint8_t g = (color >> 5)  & 0x3F;
+    uint8_t b =  color        & 0x1F;
+
+    r = (r * 255) / 31;
+    g = (g * 255) / 63;
+    b = (b * 255) / 31;
+
+    SDL_SetRenderDrawColor(dev->renderer, r, g, b, 255);
+    SDL_RenderDrawLine(dev->renderer, x0, y0, x1, y1);
+}
+
+int sdl_display_init(sdl_display_t *dev, uint16_t width, uint16_t height)
 {
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
         return -1;
@@ -61,6 +80,8 @@ int sdl_display_init(sdl_display_t *dev, int width, int height)
     dev->interface.height = height;
     dev->interface.user_data = dev;
     dev->interface.draw_pixel = sdl_draw_pixel;
+    dev->interface.draw_line  = sdl_draw_line;
+    dev->interface.flush = NULL;
 
     return 0;
 }

@@ -38,14 +38,14 @@ void c_gfx_draw_pixel(c_gfx_t *gfx,
     if (y >= gfx->clip_y + gfx->clip_h)
         return;
 
-    gfx->display->draw_pixel(gfx->display->ctx, x, y, color);
+    gfx->display->draw_pixel(gfx->display, x, y, color);
 }
 
 void c_gfx_draw_line(c_gfx_t *gfx,
-                     int x0,
-                     int y0,
-                     int x1,
-                     int y1,
+                     uint16_t x0,
+                     uint16_t y0,
+                     uint16_t x1,
+                     uint16_t y1,
                      uint16_t color)
 {
     int dx = abs(x1 - x0);

@@ -4,22 +4,24 @@
 #include "c_gfx_display.h"
 #include <SDL2/SDL.h>
 
-typedef struct {
-
+typedef struct
+{
     SDL_Window   *window;
     SDL_Renderer *renderer;
+    SDL_Texture  *texture;
 
     uint16_t width;
     uint16_t height;
 
+    c_gfx_display_t interface;
+
 } sdl_display_t;
 
-int  sdl_display_init(sdl_display_t *dev,
-                      uint16_t width,
-                      uint16_t height);
+int sdl_display_init(sdl_display_t *dev,
+                        int width,
+                        int height);
 
-void sdl_display_create(sdl_display_t *dev,
-                        c_gfx_display_t *display);
+c_gfx_display_t* sdl_display_get_interface(sdl_display_t *dev);
 
 void sdl_display_present(sdl_display_t *dev);
 

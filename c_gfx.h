@@ -30,10 +30,10 @@ void c_gfx_draw_pixel(c_gfx_t *gfx,
                       uint16_t color);
 
 void c_gfx_draw_line(c_gfx_t *gfx,
-                     int x0,
-                     int y0,
-                     int x1,
-                     int y1,
+                     uint16_t x0,
+                     uint16_t y0,
+                     uint16_t x1,
+                     uint16_t y1,
                      uint16_t color);
 
 #endif
